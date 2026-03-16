@@ -35,6 +35,7 @@ This project contains Agent Skills based on **Problem Frames** methodology for r
 | `coding-standards` | Enforce coding conventions (Java/TypeScript/Go/Rust) |
 | `enforce-contract` | Validate pre/post-conditions & invariants |
 | `generate-acceptance-test` | Generate BDD/ezSpec test skeleton |
+| `mutation-testing` | Test quality verification through mutation testing |
 
 ### Review & Validation
 
@@ -77,6 +78,15 @@ Complex Flow → saga-orchestrator → runSubagent → [command|query|reactor] �
 ```
 analyze-frame → identify cross_context_dependencies → cross-context → ACL Design → Sub-agent integration
 ```
+
+## Slash Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/analyze` | Analyze new requirements, classify problem frame, generate spec directory |
+| `/saga` | Orchestrate cross-frame complex flows with Saga pattern |
+| `/review` | Run full code review (architecture, standards, contracts, spec compliance) |
+| `/validate` | Validate spec directory completeness and code-spec consistency |
 
 ## Sub-agent Integration
 
