@@ -42,7 +42,49 @@
 
 ## 快速開始
 
-### 方式一：作為 Claude Plugin 使用 (推薦)
+### 方式一：透過 `npx skills` 安裝（推薦）
+
+使用 [Skills CLI](https://github.com/vercel-labs/skills) 直接安裝 — 支援 Claude Code、Cursor、Codex、Gemini CLI 等多種 Agent。
+
+```bash
+# 列出此 repo 中可用的 skills
+npx skills add knowlet/pf-skills --list
+
+# 全域安裝所有 skills 到 Claude Code
+npx skills add knowlet/pf-skills --all -g -a claude-code
+
+# 只安裝特定 skills
+npx skills add knowlet/pf-skills --skill analyze-frame --skill command-sub-agent --skill arch-guard
+
+# 同時安裝到多個 Agent
+npx skills add knowlet/pf-skills --all -a claude-code -a cursor -a codex
+
+# 非互動模式（適用於 CI/CD 或腳本）
+npx skills add knowlet/pf-skills --all -g -a claude-code -y
+```
+
+安裝後驗證：
+```bash
+npx skills list
+```
+
+#### 管理已安裝的 skills
+
+```bash
+# 檢查更新
+npx skills check
+
+# 更新至最新版本
+npx skills update
+
+# 移除特定 skill
+npx skills remove analyze-frame
+
+# 移除此 repo 的所有 skills
+npx skills remove --all
+```
+
+### 方式二：作為 Claude Plugin 使用
 
 不需要複製任何檔案，直接在專案根目錄加載：
 
@@ -68,7 +110,7 @@ claude --plugin-dir .
     @command-sub-agent 請根據 aggregate.yaml 實作 createOrder method
     ```
 
-### 方式二：作為 Personal Skills 使用 (舊版)
+### 方式三：作為 Personal Skills 使用（舊版）
 
 將 Skills 複製到全域配置目錄：
 

@@ -205,10 +205,39 @@ Templates location: `~/.claude/skills/analyze-frame/templates/`
 | TypeScript | Cucumber.js / Jest-Cucumber | Manual / Auto |
 | Rust | cucumber-rs | Macro-assisted |
 
-## Usage in Claude Code
+## Installation
 
-To use these skills, copy them to:
-- Personal: `~/.claude/skills/`
-- Project: `.claude/skills/`
+### Via `npx skills` (Recommended)
 
-See [README.md](README.md) for detailed instructions.
+```bash
+# Install all skills globally for Claude Code
+npx skills add knowlet/pf-skills --all -g -a claude-code
+
+# Install specific skills only
+npx skills add knowlet/pf-skills --skill analyze-frame --skill command-sub-agent
+
+# Install for multiple agents (Claude Code, Cursor, Codex, etc.)
+npx skills add knowlet/pf-skills --all -a claude-code -a cursor -a codex
+```
+
+Manage installed skills:
+```bash
+npx skills list          # List installed skills
+npx skills check         # Check for updates
+npx skills update        # Update to latest
+npx skills remove --all  # Remove all skills
+```
+
+### Via Claude Plugin
+
+```bash
+claude --plugin-dir .
+```
+
+### Manual Copy (Legacy)
+
+```bash
+cp -r skills/* ~/.claude/skills/
+```
+
+See [README.md](README.md) for detailed instructions and usage examples.

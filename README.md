@@ -42,7 +42,49 @@ For a rigorous software engineering framework like **Problem Frames**, we strong
 
 ## Quick Start
 
-### Method 1: Using as a Claude Plugin (Recommended)
+### Method 1: Install via `npx skills` (Recommended)
+
+Use the [Skills CLI](https://github.com/vercel-labs/skills) to install directly — works with Claude Code, Cursor, Codex, Gemini CLI, and more.
+
+```bash
+# List available skills in this repo
+npx skills add knowlet/pf-skills --list
+
+# Install all skills globally for Claude Code
+npx skills add knowlet/pf-skills --all -g -a claude-code
+
+# Install specific skills only
+npx skills add knowlet/pf-skills --skill analyze-frame --skill command-sub-agent --skill arch-guard
+
+# Install for multiple agents at once
+npx skills add knowlet/pf-skills --all -a claude-code -a cursor -a codex
+
+# Non-interactive mode (for CI/CD or scripts)
+npx skills add knowlet/pf-skills --all -g -a claude-code -y
+```
+
+After installation, verify with:
+```bash
+npx skills list
+```
+
+#### Manage installed skills
+
+```bash
+# Check for updates
+npx skills check
+
+# Update to latest version
+npx skills update
+
+# Remove a specific skill
+npx skills remove analyze-frame
+
+# Remove all skills from this repo
+npx skills remove --all
+```
+
+### Method 2: Using as a Claude Plugin
 
 No need to copy files, load directly in the project root:
 
@@ -68,7 +110,7 @@ claude --plugin-dir .
     @command-sub-agent Please implement createOrder method according to aggregate.yaml
     ```
 
-### Method 2: Using as Personal Skills (Legacy)
+### Method 3: Using as Personal Skills (Legacy)
 
 Copy skills to the global configuration directory:
 
