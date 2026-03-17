@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: 自動化代碼審查，檢查程式碼品質、架構合規性、編碼標準，並與規格定義進行比對。
+description: Automated code review that checks code quality, Clean Architecture compliance, DDD patterns, coding standards, and spec traceability.
 ---
 
 # Code Reviewer Skill
@@ -81,10 +81,10 @@ ddd_checks:
 
 | 語言 | 參考文件 |
 |------|----------|
-| Java | `coding-standards/references/JAVA_CLEAN_ARCH.md` |
-| TypeScript | `coding-standards/references/TYPESCRIPT.md` |
-| Go | `coding-standards/references/GOLANG.md` |
-| Rust | `coding-standards/references/RUST.md` |
+| Java | `skills/coding-standards/references/JAVA_CLEAN_ARCH.md` |
+| TypeScript | `skills/coding-standards/references/TYPESCRIPT.md` |
+| Go | `skills/coding-standards/references/GOLANG.md` |
+| Rust | `skills/coding-standards/references/RUST.md` |
 
 ---
 
@@ -226,29 +226,6 @@ review_issues:
 │   arch-guard    │ │coding-standards │ │ multi-model-    │
 │ (架構守護)       │ │ (編碼標準)       │ │ reviewer        │
 └─────────────────┘ └─────────────────┘ └─────────────────┘
-```
-
----
-
-## 命令行工具
-
-```bash
-# 審查單一檔案
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --file src/workflow/usecase/service/CreateWorkflowService.java
-
-# 審查目錄
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --dir src/workflow/
-
-# 比對規格
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --file src/workflow/usecase/service/CreateWorkflowService.java \
-    --spec docs/specs/create-workflow/
-
-# PR 審查模式
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --git-diff origin/main..HEAD
 ```
 
 ---

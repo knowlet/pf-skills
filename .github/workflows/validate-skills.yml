@@ -1,0 +1,129 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - ".claude-plugin/**"
+      - ".github/scripts/**"
+      - ".github/workflows/validate-skills.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - ".claude-plugin/**"
+      - ".github/scripts/**"
+      - ".github/workflows/validate-skills.yml"
+
+jobs:
+  validate:
+    name: Validate SKILL.md files
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        skill:
+          - analyze-frame
+          - arch-guard
+          - code-reviewer
+          - coding-standards
+          - command-sub-agent
+          - cross-context
+          - enforce-contract
+          - generate-acceptance-test
+          - multi-model-reviewer
+          - mutation-testing
+          - query-sub-agent
+          - reactor-sub-agent
+          - saga-orchestrator
+          - spec-compliance-validator
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate ${{ matrix.skill }}
+        uses: Flash-Brew-Digital/validate-skill@v1
+        with:
+          path: skills/${{ matrix.skill }}
+          validate-references: "true"
+          ignore-rules: "body-progressive-disclosure,body-length"
+
+  structure:
+    name: Validate skill structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check all skills have SKILL.md
+        run: |
+          missing=0
+          for dir in skills/*/; do
+            skill=$(basename "$dir")
+            if [ ! -f "$dir/SKILL.md" ]; then
+              echo "::error::Missing SKILL.md in $dir"
+              missing=$((missing + 1))
+            fi
+          done
+          if [ "$missing" -gt 0 ]; then
+            echo "::error::$missing skill(s) missing SKILL.md"
+            exit 1
+          fi
+          echo "All skills have SKILL.md"
+
+      - name: Check SKILL.md frontmatter
+        run: |
+          errors=0
+          for file in skills/*/SKILL.md; do
+            skill=$(basename "$(dirname "$file")")
+
+            # Check file starts with frontmatter delimiter
+            if ! head -1 "$file" | grep -q '^---$'; then
+              echo "::error file=$file::Missing YAML frontmatter"
+              errors=$((errors + 1))
+              continue
+            fi
+
+            # Extract frontmatter between first and second ---
+            frontmatter=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{closed=1; exit} found{print}' "$file")
+            closed=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{print "yes"; exit}' "$file")
+
+            if [ "$closed" != "yes" ]; then
+              echo "::error file=$file::Unterminated frontmatter (missing closing ---)"
+              errors=$((errors + 1))
+              continue
+            fi
+
+            # Check required fields
+            if ! echo "$frontmatter" | grep -q '^name:'; then
+              echo "::error file=$file::Missing 'name' in frontmatter"
+              errors=$((errors + 1))
+            fi
+            if ! echo "$frontmatter" | grep -q '^description:'; then
+              echo "::error file=$file::Missing 'description' in frontmatter"
+              errors=$((errors + 1))
+            fi
+          done
+
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::$errors frontmatter error(s) found"
+            exit 1
+          fi
+          echo "All SKILL.md files have valid frontmatter"
+
+      - name: Validate doc paths
+        run: python3 .github/scripts/validate_doc_paths.py
+
+      - name: Check plugin.json
+        run: |
+          if [ ! -f ".claude-plugin/plugin.json" ]; then
+            echo "::error::Missing .claude-plugin/plugin.json"
+            exit 1
+          fi
+          # Validate JSON syntax
+          python3 -c "import json; json.load(open('.claude-plugin/plugin.json'))"
+          echo "plugin.json is valid JSON"
