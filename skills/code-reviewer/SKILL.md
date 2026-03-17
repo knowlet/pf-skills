@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: 自動化代碼審查，檢查程式碼品質、架構合規性、編碼標準，並與規格定義進行比對。
+description: Automated code review that checks code quality, Clean Architecture compliance, DDD patterns, coding standards, and spec traceability.
 ---
 
 # Code Reviewer Skill
@@ -79,12 +79,12 @@ ddd_checks:
 
 參考對應的編碼標準：
 
-| 語言 | 參考文件 |
+| 語言 | 參考文件 (in coding-standards skill) |
 |------|----------|
-| Java | [`JAVA_CLEAN_ARCH.md`](../coding-standards/references/JAVA_CLEAN_ARCH.md) |
-| TypeScript | [`TYPESCRIPT.md`](../coding-standards/references/TYPESCRIPT.md) |
-| Go | [`GOLANG.md`](../coding-standards/references/GOLANG.md) |
-| Rust | [`RUST.md`](../coding-standards/references/RUST.md) |
+| Java | `coding-standards/references/JAVA_CLEAN_ARCH.md` |
+| TypeScript | `coding-standards/references/TYPESCRIPT.md` |
+| Go | `coding-standards/references/GOLANG.md` |
+| Rust | `coding-standards/references/RUST.md` |
 
 ---
 
