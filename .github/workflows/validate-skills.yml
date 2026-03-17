@@ -6,12 +6,14 @@ on:
     paths:
       - "skills/**"
       - ".claude-plugin/**"
+      - ".github/scripts/**"
       - ".github/workflows/validate-skills.yml"
   pull_request:
     branches: [main]
     paths:
       - "skills/**"
       - ".claude-plugin/**"
+      - ".github/scripts/**"
       - ".github/workflows/validate-skills.yml"
 
 jobs:
@@ -112,6 +114,9 @@ jobs:
             exit 1
           fi
           echo "All SKILL.md files have valid frontmatter"
+
+      - name: Validate doc paths
+        run: python3 .github/scripts/validate_doc_paths.py
 
       - name: Check plugin.json
         run: |
