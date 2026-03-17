@@ -77,11 +77,11 @@ npx skills check
 # 更新至最新版本
 npx skills update
 
-# 移除特定 skill
-npx skills remove analyze-frame
+# 移除特定 skill（-g 對應全域安裝）
+npx skills remove analyze-frame -g
 
-# 移除此 repo 的所有 skills
-npx skills remove --all
+# 移除所有已安裝的 skills（注意：不限於此 repo，會移除所有已安裝的 skills）
+npx skills remove --all -g
 ```
 
 ### 方式二：作為 Claude Plugin 使用

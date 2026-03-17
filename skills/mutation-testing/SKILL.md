@@ -438,7 +438,13 @@ jobs:
 
       - name: Check mutation score threshold
         run: |
-          SCORE=$(grep -oP 'mutation_score=\K[0-9]+' target/pit-reports/mutations.xml || echo "0")
+          # PIT mutations.xml has per-mutation results; calculate score from totals
+          KILLED=$(grep -c 'status="KILLED"' target/pit-reports/mutations.xml || echo "0")
+          TOTAL=$(grep -c '<mutation ' target/pit-reports/mutations.xml || echo "0")
+          if [ "$TOTAL" -eq 0 ]; then
+            echo "No mutations found"; exit 1
+          fi
+          SCORE=$(( KILLED * 100 / TOTAL ))
           if [ "$SCORE" -lt 80 ]; then
             echo "Mutation score $SCORE% is below threshold (80%)"
             exit 1

@@ -42,7 +42,7 @@ For a rigorous software engineering framework like **Problem Frames**, we strong
 
 ## Quick Start
 
-### Method 1: Install via `npx skills` (Recommended)
+### Method 1: Install via `npx skills`
 
 Use the [Skills CLI](https://github.com/vercel-labs/skills) to install directly — works with Claude Code, Cursor, Codex, Gemini CLI, and more.
 
@@ -80,7 +80,7 @@ npx skills update
 # Remove a specific skill
 npx skills remove analyze-frame
 
-# Remove all skills from this repo
+# Remove all installed skills (caution: removes skills from all repos, not just this one)
 npx skills remove --all
 ```
 
