@@ -16,7 +16,11 @@ use myapp::application::use_cases::{CreateWorkflowUseCase, CreateWorkflowInput, 
 use myapp::domain::{WorkflowRepository, EventPublisher, AuthorizationService};
 use myapp::domain::errors::DomainError;
 use myapp::infrastructure::repositories::InMemoryWorkflowRepository;
-use myapp::infrastructure::mocks::{MockEventPublisher, MockAuthorizationService};
+
+// Test doubles live in tests/support/mocks.rs (see below)
+#[path = "support/mocks.rs"]
+mod mocks;
+use mocks::{MockEventPublisher, MockAuthorizationService};
 
 // ===== World Definition =====
 
@@ -184,4 +188,80 @@ tokio = { version = "1", features = ["full", "test-util"] }
 name = "create_workflow"
 path = "tests/acceptance/create_workflow.rs"
 harness = false
+```
+
+### Rust: Test Doubles (`tests/acceptance/support/mocks.rs`)
+
+```rust
+// tests/acceptance/support/mocks.rs
+// Companion test doubles for the acceptance test above
+
+use async_trait::async_trait;
+use myapp::domain::{EventPublisher, AuthorizationService, DomainEvent};
+use myapp::domain::errors::DomainError;
+
+#[derive(Debug, Default)]
+pub struct MockEventPublisher {
+    events: Vec<DomainEvent>,
+}
+
+impl MockEventPublisher {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn event_count(&self) -> usize {
+        self.events.len()
+    }
+
+    pub fn has_event_type(&self, event_type: &str) -> bool {
+        self.events.iter().any(|e| e.event_type == event_type)
+    }
+}
+
+#[async_trait]
+impl EventPublisher for MockEventPublisher {
+    async fn publish(&mut self, event: DomainEvent) -> Result<(), DomainError> {
+        self.events.push(event);
+        Ok(())
+    }
+}
+
+#[derive(Debug, Default)]
+pub struct MockAuthorizationService {
+    allowed: Vec<(String, String, String)>,
+    deny_all: bool,
+}
+
+impl MockAuthorizationService {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn allow_capability(&mut self, user_id: &str, capability: &str, resource_id: &str) {
+        self.allowed.push((
+            user_id.to_string(),
+            capability.to_string(),
+            resource_id.to_string(),
+        ));
+    }
+
+    pub fn deny_all(&mut self) {
+        self.deny_all = true;
+    }
+}
+
+#[async_trait]
+impl AuthorizationService for MockAuthorizationService {
+    async fn check(&self, user_id: &str, capability: &str, resource_id: &str) -> Result<(), DomainError> {
+        if self.deny_all {
+            return Err(DomainError::Unauthorized(format!("{} not authorized", user_id)));
+        }
+        if self.allowed.iter().any(|(u, c, r)| u == user_id && c == capability && r == resource_id) {
+            Ok(())
+        } else {
+            Err(DomainError::Unauthorized(format!("{} not authorized for {} on {}", user_id, capability, resource_id)))
+        }
+    }
+}
 ```
