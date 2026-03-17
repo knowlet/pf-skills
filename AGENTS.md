@@ -90,10 +90,10 @@ Command names depend on how the skills are installed:
 
 | Command | Purpose |
 |---------|---------|
-| `analyze` | Analyze new requirements, classify problem frame, generate spec directory |
-| `saga` | Orchestrate cross-frame complex flows with Saga pattern |
-| `review` | Run full code review (architecture, standards, contracts, spec compliance) |
-| `validate` | Validate spec directory completeness and code-spec consistency |
+| `/analyze` | Analyze new requirements, classify problem frame, generate spec directory |
+| `/saga` | Orchestrate cross-frame complex flows with Saga pattern |
+| `/review` | Run full code review (architecture, standards, contracts, spec compliance) |
+| `/validate` | Validate spec directory completeness and code-spec consistency |
 
 ## Sub-agent Integration
 

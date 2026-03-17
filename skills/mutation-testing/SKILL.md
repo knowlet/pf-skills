@@ -439,8 +439,8 @@ jobs:
       - name: Check mutation score threshold
         run: |
           # PIT mutations.xml has per-mutation results; calculate score from totals
-          KILLED=$(grep -c 'status="KILLED"' target/pit-reports/mutations.xml || echo "0")
-          TOTAL=$(grep -c '<mutation ' target/pit-reports/mutations.xml || echo "0")
+          KILLED=$(grep -c 'status="KILLED"' target/pit-reports/mutations.xml) || KILLED=0
+          TOTAL=$(grep -c '<mutation ' target/pit-reports/mutations.xml) || TOTAL=0
           if [ "$TOTAL" -eq 0 ]; then
             echo "No mutations found"; exit 1
           fi

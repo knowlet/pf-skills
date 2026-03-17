@@ -80,7 +80,7 @@ npx skills update
 # Remove a specific skill
 npx skills remove analyze-frame
 
-# Remove all installed skills (caution: removes skills from all repos, not just this one)
+# Remove all installed skills in current project scope
 npx skills remove --all
 ```
 
