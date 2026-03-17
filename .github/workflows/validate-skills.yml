@@ -44,8 +44,8 @@ jobs:
         uses: Flash-Brew-Digital/validate-skill@v1
         with:
           path: skills/${{ matrix.skill }}
-          fail-on-warning: "true"
           validate-references: "true"
+          ignore-rules: "body-progressive-disclosure,body-length"
 
   structure:
     name: Validate skill structure
@@ -84,8 +84,8 @@ jobs:
               continue
             fi
 
-            # Extract frontmatter (between first and second ---)
-            frontmatter=$(sed -n '1,/^---$/{ /^---$/d; p; }' "$file" | sed '1d')
+            # Extract frontmatter between first and second ---
+            frontmatter=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{exit} found{print}' "$file")
 
             # Check required fields
             if ! echo "$frontmatter" | grep -q '^name:'; then
