@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - "skills/**"
+      - ".claude-plugin/**"
       - ".github/workflows/validate-skills.yml"
   pull_request:
     branches: [main]
     paths:
       - "skills/**"
+      - ".claude-plugin/**"
       - ".github/workflows/validate-skills.yml"
 
 jobs:
@@ -85,7 +87,14 @@ jobs:
             fi
 
             # Extract frontmatter between first and second ---
-            frontmatter=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{exit} found{print}' "$file")
+            frontmatter=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{closed=1; exit} found{print}' "$file")
+            closed=$(awk 'NR==1 && /^---$/{found=1; next} found && /^---$/{print "yes"; exit}' "$file")
+
+            if [ "$closed" != "yes" ]; then
+              echo "::error file=$file::Unterminated frontmatter (missing closing ---)"
+              errors=$((errors + 1))
+              continue
+            fi
 
             # Check required fields
             if ! echo "$frontmatter" | grep -q '^name:'; then
