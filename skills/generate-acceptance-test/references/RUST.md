@@ -16,10 +16,7 @@ use myapp::application::use_cases::{CreateWorkflowUseCase, CreateWorkflowInput, 
 use myapp::domain::{WorkflowRepository, EventPublisher, AuthorizationService};
 use myapp::domain::errors::DomainError;
 use myapp::infrastructure::repositories::InMemoryWorkflowRepository;
-
-// Note: Test doubles are defined in the integration test crate, not behind #[cfg(test)]
-mod support;
-use support::mocks::{MockEventPublisher, MockAuthorizationService};
+use myapp::infrastructure::mocks::{MockEventPublisher, MockAuthorizationService};
 
 // ===== World Definition =====
 

@@ -10,6 +10,7 @@ import { describe, it, beforeEach, expect } from 'vitest';
 import { CreateWorkflowUseCase } from '@/application/use-cases/CreateWorkflowUseCase';
 import { InMemoryWorkflowRepository } from '@/infrastructure/repositories/InMemoryWorkflowRepository';
 import { MockEventPublisher } from '@/tests/mocks/MockEventPublisher';
+import { MockAuthorizationService } from '@/tests/mocks/MockAuthorizationService';
 import { AuthFixture, BoardFixture } from '@/tests/fixtures';
 import { UnauthorizedError, ConflictError } from '@/domain/errors';
 
@@ -17,13 +18,16 @@ describe('Feature: Create Workflow', () => {
   let useCase: CreateWorkflowUseCase;
   let workflowRepository: InMemoryWorkflowRepository;
   let eventPublisher: MockEventPublisher;
+  let authService: MockAuthorizationService;
 
   beforeEach(() => {
     workflowRepository = new InMemoryWorkflowRepository();
     eventPublisher = new MockEventPublisher();
+    authService = new MockAuthorizationService();
     useCase = new CreateWorkflowUseCase(
       workflowRepository,
       eventPublisher,
+      authService,
     );
   });
 
