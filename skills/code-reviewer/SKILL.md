@@ -79,12 +79,12 @@ ddd_checks:
 
 參考對應的編碼標準：
 
-| 語言 | 參考文件 (in coding-standards skill) |
+| 語言 | 參考文件 |
 |------|----------|
-| Java | `coding-standards/references/JAVA_CLEAN_ARCH.md` |
-| TypeScript | `coding-standards/references/TYPESCRIPT.md` |
-| Go | `coding-standards/references/GOLANG.md` |
-| Rust | `coding-standards/references/RUST.md` |
+| Java | `skills/coding-standards/references/JAVA_CLEAN_ARCH.md` |
+| TypeScript | `skills/coding-standards/references/TYPESCRIPT.md` |
+| Go | `skills/coding-standards/references/GOLANG.md` |
+| Rust | `skills/coding-standards/references/RUST.md` |
 
 ---
 
