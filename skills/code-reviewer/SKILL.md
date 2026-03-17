@@ -81,10 +81,10 @@ ddd_checks:
 
 | 語言 | 參考文件 (in coding-standards skill) |
 |------|----------|
-| Java | `skills/coding-standards/references/JAVA_CLEAN_ARCH.md` |
-| TypeScript | `skills/coding-standards/references/TYPESCRIPT.md` |
-| Go | `skills/coding-standards/references/GOLANG.md` |
-| Rust | `skills/coding-standards/references/RUST.md` |
+| Java | `coding-standards/references/JAVA_CLEAN_ARCH.md` |
+| TypeScript | `coding-standards/references/TYPESCRIPT.md` |
+| Go | `coding-standards/references/GOLANG.md` |
+| Rust | `coding-standards/references/RUST.md` |
 
 ---
 

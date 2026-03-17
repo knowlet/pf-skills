@@ -17,7 +17,7 @@ use myapp::domain::{WorkflowRepository, EventPublisher, AuthorizationService};
 use myapp::domain::errors::DomainError;
 use myapp::infrastructure::repositories::InMemoryWorkflowRepository;
 
-// Test doubles live in tests/support/mocks.rs (see below)
+// Test doubles live in tests/acceptance/support/mocks.rs (see below)
 #[path = "support/mocks.rs"]
 mod mocks;
 use mocks::{MockEventPublisher, MockAuthorizationService};
