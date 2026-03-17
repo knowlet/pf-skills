@@ -262,32 +262,6 @@ validation_issues:
 
 ---
 
-## 命令行工具
-
-```bash
-# 驗證單一規格目錄
-python ~/.claude/skills/spec-compliance-validator/scripts/validate.py \
-    docs/specs/create-workflow/
-
-# 驗證所有規格
-python ~/.claude/skills/spec-compliance-validator/scripts/validate.py \
-    docs/specs/ --recursive
-
-# 快速檢查 (只檢查結構)
-python ~/.claude/skills/spec-compliance-validator/scripts/validate.py \
-    docs/specs/create-workflow/ --quick
-
-# 生成修復建議
-python ~/.claude/skills/spec-compliance-validator/scripts/validate.py \
-    docs/specs/create-workflow/ --fix-suggestions
-
-# JSON 輸出
-python ~/.claude/skills/spec-compliance-validator/scripts/validate.py \
-    docs/specs/create-workflow/ --format json
-```
-
----
-
 ## 標準參考檔案
 
 ### 共用標準位置

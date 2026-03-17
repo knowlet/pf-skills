@@ -81,10 +81,10 @@ ddd_checks:
 
 | 語言 | 參考文件 |
 |------|----------|
-| Java | `coding-standards/references/JAVA_CLEAN_ARCH.md` |
-| TypeScript | `coding-standards/references/TYPESCRIPT.md` |
-| Go | `coding-standards/references/GOLANG.md` |
-| Rust | `coding-standards/references/RUST.md` |
+| Java | [`JAVA_CLEAN_ARCH.md`](../coding-standards/references/JAVA_CLEAN_ARCH.md) |
+| TypeScript | [`TYPESCRIPT.md`](../coding-standards/references/TYPESCRIPT.md) |
+| Go | [`GOLANG.md`](../coding-standards/references/GOLANG.md) |
+| Rust | [`RUST.md`](../coding-standards/references/RUST.md) |
 
 ---
 
@@ -226,29 +226,6 @@ review_issues:
 │   arch-guard    │ │coding-standards │ │ multi-model-    │
 │ (架構守護)       │ │ (編碼標準)       │ │ reviewer        │
 └─────────────────┘ └─────────────────┘ └─────────────────┘
-```
-
----
-
-## 命令行工具
-
-```bash
-# 審查單一檔案
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --file src/workflow/usecase/service/CreateWorkflowService.java
-
-# 審查目錄
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --dir src/workflow/
-
-# 比對規格
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --file src/workflow/usecase/service/CreateWorkflowService.java \
-    --spec docs/specs/create-workflow/
-
-# PR 審查模式
-python ~/.claude/skills/code-reviewer/scripts/review.py \
-    --git-diff origin/main..HEAD
 ```
 
 ---
