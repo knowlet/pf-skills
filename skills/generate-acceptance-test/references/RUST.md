@@ -16,7 +16,10 @@ use myapp::application::use_cases::{CreateWorkflowUseCase, CreateWorkflowInput, 
 use myapp::domain::{WorkflowRepository, EventPublisher, AuthorizationService};
 use myapp::domain::errors::DomainError;
 use myapp::infrastructure::repositories::InMemoryWorkflowRepository;
-use myapp::tests::mocks::{MockEventPublisher, MockAuthorizationService};
+
+// Note: Test doubles are defined in the integration test crate, not behind #[cfg(test)]
+mod support;
+use support::mocks::{MockEventPublisher, MockAuthorizationService};
 
 // ===== World Definition =====
 
@@ -178,4 +181,10 @@ async fn main() {
 cucumber = { version = "0.20", features = ["macros"] }
 async-trait = "0.1"
 tokio = { version = "1", features = ["full", "test-util"] }
+
+# cucumber-rs uses its own main(), so disable the default test harness
+[[test]]
+name = "create_workflow"
+path = "tests/acceptance/create_workflow.rs"
+harness = false
 ```

@@ -10,6 +10,7 @@ package acceptance
 
 import (
     "context"
+    "errors"
     "testing"
     "sync"
 
@@ -17,6 +18,7 @@ import (
     "github.com/stretchr/testify/require"
 
     "myapp/application/usecase"
+    "myapp/domain"
     "myapp/tests/fixtures"
     "myapp/tests/mocks"
 )

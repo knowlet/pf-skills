@@ -315,10 +315,10 @@ sync_report:
 
 詳細的各語言測試生成範例請參考：
 
-- [Java ezSpec 生成參考](references/JAVA_EZSPEC.md) — Fluent API, 無需 step definition
-- [Go 測試生成參考](references/GOLANG.md) — testify + Ginkgo + Gomega
-- [TypeScript 測試生成參考](references/TYPESCRIPT.md) — Vitest + Cucumber.js + Jest-Cucumber
-- [Rust 測試生成參考](references/RUST.md) — cucumber-rs
+- `references/JAVA_EZSPEC.md` — Java ezSpec Fluent API, 無需 step definition
+- `references/GOLANG.md` — Go testify + Ginkgo + Gomega
+- `references/TYPESCRIPT.md` — TypeScript Vitest + Cucumber.js + Jest-Cucumber
+- `references/RUST.md` — Rust cucumber-rs
 
 ### 框架選擇指南
 

@@ -11,6 +11,7 @@ import { CreateWorkflowUseCase } from '@/application/use-cases/CreateWorkflowUse
 import { InMemoryWorkflowRepository } from '@/infrastructure/repositories/InMemoryWorkflowRepository';
 import { MockEventPublisher } from '@/tests/mocks/MockEventPublisher';
 import { AuthFixture, BoardFixture } from '@/tests/fixtures';
+import { UnauthorizedError, ConflictError } from '@/domain/errors';
 
 describe('Feature: Create Workflow', () => {
   let useCase: CreateWorkflowUseCase;
@@ -21,7 +22,8 @@ describe('Feature: Create Workflow', () => {
     workflowRepository = new InMemoryWorkflowRepository();
     eventPublisher = new MockEventPublisher();
     useCase = new CreateWorkflowUseCase(
-      /* dependencies injected */
+      workflowRepository,
+      eventPublisher,
     );
   });
 

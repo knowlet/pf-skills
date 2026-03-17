@@ -35,8 +35,8 @@ public void should_create_workflow_successfully() {
         .And("the workflow should not be deleted", ScenarioEnvironment env -> {...})
         .And("the workflow should have no root stages initially", ScenarioEnvironment env -> {...})
         .And("a WorkflowCreated event should be published", ScenarioEnvironment env -> {
-            await().atMost(timeout: 5, TimeUnit.SECONDS).untilAsserted(() -> {
-                assertThat(notifyFakeHandleAllEventsService.getHandledEventsSize()).isEqualTo(expected: 1);
+            await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
+                assertThat(notifyFakeHandleAllEventsService.getHandledEventsSize()).isEqualTo(1);
                 assertThat(notifyFakeHandleAllEventsService.handledEventTimes(WorkflowEvents.WorkflowCreated.class)).isEqualTo(1);
             });
 
@@ -57,6 +57,14 @@ public void should_create_workflow_successfully() {
 3. **Fluent API**：`.Given()` → `.When()` → `.ThenSuccess()` / `.ThenFailure()` → `.And()` → `.Execute()`
 4. **Lambda 環境**：使用 `ScenarioEnvironment` 傳遞狀態
 5. **事件驗證**：使用 `await().atMost()` 處理非同步事件
+
+### 測試資料範例
+
+```yaml
+test_data:
+    - name: "validWorkflowInput"
+      type: "CreateWorkflowInput"
+      value:
         boardId: "board-123"
         name: "Sprint 1"
         operatorId: "user-456"
