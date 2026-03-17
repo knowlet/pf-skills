@@ -26,6 +26,8 @@ REPO_ROOT_PREFIXES = (
     ".github/",
     ".claude-plugin/",
     "commands/",
+    "agents/",
+    "template/",
 )
 
 SKIP_PATTERNS = [
@@ -132,10 +134,21 @@ def validate_file(md_path: Path, repo_root: Path) -> list[str]:
 def main() -> int:
     repo_root = Path(os.environ.get("GITHUB_WORKSPACE", ".")).resolve()
 
-    md_files = sorted(repo_root.glob("skills/**/*.md"))
+    # Scan all markdown files in the repo — not just skills/
+    scan_patterns = [
+        "skills/**/*.md",
+        "commands/**/*.md",
+        "agents/**/*.md",
+        "template/**/*.md",
+        "*.md",
+    ]
+    md_files: list[Path] = []
+    for pattern in scan_patterns:
+        md_files.extend(repo_root.glob(pattern))
+    md_files = sorted(set(md_files))
 
     if not md_files:
-        print("No markdown files found under skills/")
+        print("No markdown files found")
         return 1
 
     total_errors = 0
