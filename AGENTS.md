@@ -45,6 +45,12 @@ This project contains Agent Skills based on **Problem Frames** methodology for r
 | `spec-compliance-validator` | Validate spec completeness & format compliance |
 | `multi-model-reviewer` | Multi-AI verification (Spec == Program == Test) |
 
+### Skill Authoring
+
+| Skill | Purpose |
+|-------|---------|
+| `skill-creator` | Create new skills, improve existing skills, run evals, and optimize skill descriptions |
+
 ## Spec Directory Structure
 
 ```

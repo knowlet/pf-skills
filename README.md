@@ -234,6 +234,12 @@ docs/specs/{feature-name}/
 | [`generate-acceptance-test`](skills/generate-acceptance-test/SKILL.md) | Generates BDD/ezSpec test skeletons |
 | [`mutation-testing`](skills/mutation-testing/SKILL.md) | Performs Mutation Testing to verify test quality |
 
+### Skill Authoring
+
+| Skill | Description |
+|-------|------|
+| [`skill-creator`](skills/skill-creator/SKILL.md) | Create new skills, improve existing skills, run evals, and optimize skill descriptions |
+
 ### Multi-language Support
 
 | Language | Reference |
